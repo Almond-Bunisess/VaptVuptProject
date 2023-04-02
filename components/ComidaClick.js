@@ -9,24 +9,27 @@ const ComidaClick = ({ route, navigation }) => {
   const { receita } = route.params;
   const [visible, setVisible] = useState(false);
 
-  const addToCart = useCallback(
-    (id) => {
-      setcart((cartCopy) => {
-        const newCart = { ...cartCopy };
-        if (newCart?.[id]) {
-          newCart[id].amount += 1;
-        } else {
-          newCart[id] = {
-            id,
-            amount: 1,
-          };
-        }
-        setVisible(true);
-        return newCart;
-      });
-    },
-    [setcart]
-  );
+const addToCart = useCallback(
+  (id) => {
+    setcart((cartCopy) => {
+      const newCart = { ...cartCopy };
+      if (newCart?.[id]) {
+        newCart[id].amount += 1;
+      } else {
+        const item = {
+          id,
+          amount: 1,
+          nome: receita.nome,
+        };
+        newCart[id] = item;
+      }
+      setVisible(true);
+      return newCart;
+    });
+  },
+  [setcart, receita.nome]
+);
+
 
   return (
     <SafeAreaView>

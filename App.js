@@ -4,9 +4,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 // Importa os componentes personalizados
-import ComidaClick from './components/ComidaClick'
-import Carrinho from './components/Carrinho'
-import Menu  from './components/Menu'
+import ComidaClick from './components/ComidaClick';
+import Carrinho from './components/Carrinho';
+import Menu from './components/Menu';
+import Endereco from './components/Endereco';
+import EnderecoNY from './components/EnderecoNY';
 
 // Importa o Contexto
 import Context from './Context';
@@ -15,7 +17,7 @@ import Context from './Context';
 const Drawer = createDrawerNavigator();
 
 // Componente principal do aplicativo
-export default function App(){
+export default function App() {
   return (
     // Adiciona o Context Provider para compartilhar dados em todo o aplicativo
     <Context>
@@ -28,9 +30,11 @@ export default function App(){
             // Ícone da Aba
             tabBarIcon: ({ color, size }) => {
               if (route.name === 'Restaurante Vapt Vupt') {
-                return <Ionicons name='fast-food' size={size} color={color} />;
+                return <Ionicons name="fast-food" size={size} color={color} />;
               } else if (route.name === 'Carrinho') {
-                return <Ionicons name='shopping-cart' size={size} color={color} />;
+                return (
+                  <Ionicons name="shopping-cart" size={size} color={color} />
+                );
               }
             },
             // Cor da Aba Inativa
@@ -43,15 +47,36 @@ export default function App(){
           // Rota Inicial
           initialRouteName="Restaurante Vapt Vupt">
           {/* Tela do Menu */}
-          <Drawer.Screen name="Restaurante Vapt Vupt" component={Menu} options={{tabBarStyle: { display: "none" }, tabBarButton: () => null }}/>
+          <Drawer.Screen
+            name="Restaurante Vapt Vupt"
+            component={Menu}
+            options={{
+              tabBarStyle: { display: 'none' },
+              tabBarButton: () => null,
+            }}
+          />
           {/* Tela de Detalhes */}
-          <Drawer.Screen name="Detalhes" component={ComidaClick} options={{
-            drawerItemStyle: { height: 0 }
-          }} />
+          <Drawer.Screen
+            name="Detalhes"
+            component={ComidaClick}
+            options={{
+              drawerItemStyle: { height: 0 },
+            }}
+          />
           {/* Tela do Carrinho */}
-          <Drawer.Screen name="Carrinho" component={Carrinho}/>
+          <Drawer.Screen name="Carrinho" component={Carrinho} 
+          />
+          {/* Tela do Endereco */}
+          <Drawer.Screen name="Endereços" component={Endereco} />
+          <Drawer.Screen
+            name="Novo Endereço"
+            component={EnderecoNY}
+            options={{
+              drawerItemStyle: { height: 0 },
+            }}
+          />
         </Drawer.Navigator>
       </NavigationContainer>
     </Context>
-  )
+  );
 }
