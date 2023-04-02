@@ -3,6 +3,7 @@ import { Button, Card } from 'react-native-paper';
 import pratos from '../pratos.js';
 import styles from '../Styles.js';
 import React, { useCallback } from 'react';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const Menu = React.memo(({ navigation }) => {
   const renderItem = useCallback(
@@ -25,6 +26,18 @@ const Menu = React.memo(({ navigation }) => {
     },
     [navigation]
   );
+
+  navigation.setOptions({
+    headerRight: () => (
+      <Icon
+        name="shopping-cart"
+        size={30}
+        color="black"
+        style={{ marginRight: 10 }}
+        onPress={() => navigation.navigate('Carrinho')}
+      />
+    ),
+  });
 
   return (
     <SafeAreaView>
